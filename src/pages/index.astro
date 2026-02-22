@@ -1,0 +1,163 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+const posts = (await getCollection('blog'))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 8);
+---
+<Layout title="Performance Test Blog" description="Learn performance testing from scratch: JMeter, k6, Postman, metrics, and step-by-step guides.">
+  <header class="hero">
+    <h1 class="hero-title">Performance Test Blog</h1>
+    <p class="hero-desc">How to start, all steps, JMeter, k6, Postman, and every performance metric explained.</p>
+  </header>
+
+  <section class="card">
+    <h2 class="card-title">Start here</h2>
+    <ul class="link-list">
+      <li><a href="/blog/what-is-performance-testing/">What is performance testing?</a></li>
+      <li><a href="/blog/performance-testing-steps/">Performance testing in 9 steps</a></li>
+      <li><a href="/blog/performance-metrics-explained/">Performance metrics explained</a></li>
+    </ul>
+  </section>
+
+  <section class="card card-highlight">
+    <h2 class="card-title">Tools (step-by-step)</h2>
+    <p class="card-desc">Full guides with all steps and details for each tool.</p>
+    <a href="/tools/" class="card-cta">JMeter · k6 · Postman →</a>
+  </section>
+
+  <section class="card" id="topics">
+    <h2 class="card-title">Topics</h2>
+    <ul class="topic-list topic-list-links">
+      <li><a href="/blog/what-is-performance-testing/">Getting started & process</a></li>
+      <li><a href="/tools/">JMeter · k6 · Postman</a></li>
+      <li><a href="/blog/performance-metrics-explained/">Metrics & reporting</a></li>
+      <li><a href="/blog/performance-testing-web/">Web performance</a></li>
+      <li><a href="/blog/performance-testing-mobile/">Mobile performance</a></li>
+    </ul>
+  </section>
+
+  <section class="latest">
+    <h2 class="latest-title">Latest posts</h2>
+    <ul class="post-list">
+      {posts.map((post) => (
+        <li class="post-item">
+          <a href={`/blog/${post.slug}`} class="post-link">{post.data.title}</a>
+          <span class="post-date">{post.data.pubDate.toLocaleDateString()}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    margin-bottom: 2.5rem;
+  }
+  .hero-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.02em;
+  }
+  .hero-desc {
+    color: var(--text-soft);
+    font-size: 1.1rem;
+    margin: 0;
+    line-height: 1.6;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 1.25rem;
+  }
+  .card-highlight {
+    border-color: var(--accent-muted);
+    background: linear-gradient(135deg, var(--surface) 0%, var(--bg-elevated) 100%);
+  }
+  .card-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 0 0 1rem;
+    color: var(--text);
+  }
+  .card-desc {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin: 0 0 0.75rem;
+  }
+  .card-cta {
+    display: inline-block;
+    color: var(--accent);
+    font-weight: 500;
+    transition: color 0.15s ease;
+  }
+  .card-cta:hover {
+    color: var(--accent-hover);
+  }
+  .link-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .link-list li {
+    margin-bottom: 0.5rem;
+  }
+  .link-list a {
+    color: var(--text-soft);
+    transition: color 0.15s ease;
+  }
+  .link-list a:hover {
+    color: var(--accent);
+  }
+  .topic-list {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+  .topic-list li { margin-bottom: 0.35rem; }
+  .topic-list-links {
+    list-style: none;
+    padding-left: 0;
+  }
+  .topic-list-links a {
+    color: var(--text-soft);
+    transition: color 0.15s ease;
+  }
+  .topic-list-links a:hover { color: var(--accent); }
+  .latest {
+    margin-top: 2rem;
+  }
+  .latest-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 0 0 1rem;
+  }
+  .post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .post-item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .post-link {
+    color: var(--text-soft);
+    transition: color 0.15s ease;
+  }
+  .post-link:hover {
+    color: var(--accent);
+  }
+  .post-date {
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+</style>

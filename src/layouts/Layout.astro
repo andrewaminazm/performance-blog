@@ -1,0 +1,150 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = "Performance testing blog: JMeter, k6, Postman, metrics, and how to get started." } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+    <title>{title} | Performance Test Blog</title>
+    <style is:global>
+      :root {
+        --bg: #0c0c0f;
+        --bg-elevated: #131316;
+        --surface: #1a1a1f;
+        --surface-hover: #222228;
+        --border: #2a2a32;
+        --text: #f1f1f4;
+        --text-soft: #b4b4bc;
+        --muted: #7c7c88;
+        --accent: #6366f1;
+        --accent-hover: #818cf8;
+        --accent-muted: rgba(99, 102, 241, 0.15);
+        --radius: 10px;
+        --radius-sm: 6px;
+        --shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.65;
+        font-size: 1rem;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: var(--accent);
+        text-decoration: none;
+        transition: color 0.15s ease;
+      }
+      a:hover { color: var(--accent-hover); }
+
+      code {
+        background: var(--surface);
+        color: var(--text-soft);
+        padding: 0.2em 0.45em;
+        border-radius: var(--radius-sm);
+        font-size: 0.9em;
+        font-weight: 500;
+      }
+
+      pre {
+        background: var(--surface);
+        padding: 1.25rem 1.5rem;
+        border-radius: var(--radius);
+        overflow-x: auto;
+        border: 1px solid var(--border);
+      }
+      pre code {
+        background: none;
+        padding: 0;
+        color: var(--text-soft);
+      }
+
+      /* Prose for blog and content */
+      .prose {
+        max-width: 65ch;
+      }
+      .prose h2 { font-size: 1.35rem; margin-top: 2rem; margin-bottom: 0.75rem; font-weight: 600; }
+      .prose h3 { font-size: 1.15rem; margin-top: 1.5rem; margin-bottom: 0.5rem; font-weight: 600; }
+      .prose h4 { font-size: 1.05rem; margin-top: 1.25rem; margin-bottom: 0.4rem; font-weight: 600; }
+      .prose p { margin-bottom: 1rem; color: var(--text-soft); }
+      .prose ul, .prose ol { margin: 0.75rem 0 1.25rem 1.5rem; color: var(--text-soft); }
+      .prose li { margin: 0.35rem 0; }
+      .prose table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
+      .prose th, .prose td { border: 1px solid var(--border); padding: 0.6rem 0.85rem; text-align: left; }
+      .prose th { background: var(--surface); color: var(--muted); font-weight: 600; }
+      .prose hr { border: none; height: 1px; background: var(--border); margin: 2rem 0; }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="site-nav">
+        <a href="/" class="site-logo">Perf Blog</a>
+        <a href="/blog/">Posts</a>
+        <a href="/tools/">Tools</a>
+        <a href="/blog/#topics">Topics</a>
+      </nav>
+    </header>
+    <main class="site-main">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      JMeter · k6 · Postman · Metrics
+    </footer>
+  </body>
+</html>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 1.5rem;
+    background: var(--bg-elevated);
+  }
+  .site-nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .site-logo {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text) !important;
+  }
+  .site-nav a:not(.site-logo) {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  .site-nav a:not(.site-logo):hover {
+    color: var(--text-soft);
+  }
+  .site-main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+  .site-footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.875rem;
+    background: var(--bg-elevated);
+  }
+</style>

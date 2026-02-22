@@ -1,0 +1,48 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+const posts = (await getCollection('blog'))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+<Layout title="All posts" description="All performance testing blog posts.">
+  <header class="page-header">
+    <h1 class="page-title">All posts</h1>
+  </header>
+  <ul class="blog-list">
+    {posts.map((post) => (
+      <li class="blog-item">
+        <a href={`/blog/${post.slug}`} class="blog-link">{post.data.title}</a>
+        <span class="blog-meta">{post.data.pubDate.toLocaleDateString()}</span>
+        {post.data.tags.length > 0 && (
+          <span class="blog-tags"> · {post.data.tags.join(', ')}</span>
+        )}
+      </li>
+    ))}
+  </ul>
+</Layout>
+
+<style>
+  .page-header { margin-bottom: 1.5rem; }
+  .page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+  .blog-list { list-style: none; padding: 0; margin: 0; }
+  .blog-item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .blog-link {
+    color: var(--text-soft);
+    transition: color 0.15s ease;
+  }
+  .blog-link:hover { color: var(--accent); }
+  .blog-meta { color: var(--muted); font-size: 0.9rem; }
+  .blog-tags { color: var(--muted); font-size: 0.85rem; }
+</style>
