@@ -7,157 +7,330 @@ const posts = (await getCollection('blog'))
   .slice(0, 8);
 ---
 <Layout title="Performance Test Blog" description="Learn performance testing from scratch: JMeter, k6, Postman, metrics, and step-by-step guides.">
+
+  <!-- Hero -->
   <header class="hero">
+    <div class="hero-badge">Performance Testing · Load · Metrics</div>
     <h1 class="hero-title">Performance Test Blog</h1>
-    <p class="hero-desc">How to start, all steps, JMeter, k6, Postman, and every performance metric explained.</p>
+    <p class="hero-desc">Step-by-step guides for testers and QA. JMeter, k6, Postman, metrics, and everything in between — without the hype.</p>
+    <div class="hero-cta">
+      <a href="/blog/what-is-performance-testing/" class="btn btn-primary">Start here →</a>
+      <a href="/tools/" class="btn btn-ghost">Explore tools</a>
+    </div>
   </header>
 
-  <section class="card">
-    <h2 class="card-title">Start here</h2>
-    <ul class="link-list">
-      <li><a href="/blog/what-is-performance-testing/">What is performance testing?</a></li>
-      <li><a href="/blog/performance-testing-steps/">Performance testing in 9 steps</a></li>
-      <li><a href="/blog/performance-metrics-explained/">Performance metrics explained</a></li>
-    </ul>
+  <!-- Start here -->
+  <section class="section">
+    <h2 class="section-title"><span class="section-icon">🚀</span> Start here</h2>
+    <div class="card-grid">
+      <a href="/blog/what-is-performance-testing/" class="mini-card">
+        <span class="mini-card-emoji">📖</span>
+        <span class="mini-card-text">What is performance testing?</span>
+      </a>
+      <a href="/blog/performance-testing-steps/" class="mini-card">
+        <span class="mini-card-emoji">🗂️</span>
+        <span class="mini-card-text">9-step process</span>
+      </a>
+      <a href="/blog/performance-metrics-explained/" class="mini-card">
+        <span class="mini-card-emoji">📊</span>
+        <span class="mini-card-text">Metrics explained</span>
+      </a>
+      <a href="/blog/setting-performance-slas/" class="mini-card">
+        <span class="mini-card-emoji">🎯</span>
+        <span class="mini-card-text">Set SLAs & goals</span>
+      </a>
+    </div>
   </section>
 
-  <section class="card card-highlight">
-    <h2 class="card-title">Tools (step-by-step)</h2>
-    <p class="card-desc">Full guides with all steps and details for each tool.</p>
-    <a href="/tools/" class="card-cta">JMeter · k6 · Postman →</a>
+  <!-- Tools highlight -->
+  <section class="tools-card">
+    <div class="tools-card-content">
+      <h2 class="tools-card-title">Tools — step by step</h2>
+      <p class="tools-card-desc">Full guides with all setup steps, test scenarios, parameters, token auth, and copy-paste AI prompts for each tool.</p>
+      <a href="/tools/" class="btn btn-primary">JMeter · k6 · Postman →</a>
+    </div>
+    <div class="tools-badges">
+      <span class="tool-badge">JMeter</span>
+      <span class="tool-badge">k6</span>
+      <span class="tool-badge">Postman</span>
+    </div>
   </section>
 
-  <section class="card" id="topics">
-    <h2 class="card-title">Topics</h2>
-    <ul class="topic-list topic-list-links">
-      <li><a href="/blog/what-is-performance-testing/">Getting started & process</a></li>
-      <li><a href="/tools/">JMeter · k6 · Postman</a></li>
-      <li><a href="/blog/performance-metrics-explained/">Metrics & reporting</a></li>
-      <li><a href="/blog/performance-testing-web/">Web performance</a></li>
-      <li><a href="/blog/performance-testing-mobile/">Mobile performance</a></li>
-    </ul>
+  <!-- Topics -->
+  <section class="section" id="topics">
+    <h2 class="section-title"><span class="section-icon">🗂️</span> Topics</h2>
+    <div class="topics-grid">
+      <a href="/blog/what-is-performance-testing/" class="topic-pill">Getting started</a>
+      <a href="/blog/load-vs-stress-vs-spike-testing/" class="topic-pill">Load · Stress · Spike</a>
+      <a href="/tools/" class="topic-pill">JMeter · k6 · Postman</a>
+      <a href="/blog/performance-metrics-explained/" class="topic-pill">Metrics & reporting</a>
+      <a href="/blog/setting-performance-slas/" class="topic-pill">SLAs & goals</a>
+      <a href="/blog/performance-testing-web/" class="topic-pill">Web performance</a>
+      <a href="/blog/performance-testing-mobile/" class="topic-pill">Mobile performance</a>
+      <a href="/blog/api-performance-testing/" class="topic-pill">API testing</a>
+      <a href="/blog/database-performance-testing/" class="topic-pill">Database</a>
+      <a href="/blog/performance-testing-microservices/" class="topic-pill">Microservices</a>
+      <a href="/blog/performance-testing-cloud/" class="topic-pill">Cloud (AWS · Azure · GCP)</a>
+      <a href="/blog/real-user-monitoring-vs-synthetic/" class="topic-pill">RUM vs Synthetic</a>
+      <a href="/blog/performance-testing-cicd/" class="topic-pill">CI/CD</a>
+      <a href="/blog/analyzing-performance-results/" class="topic-pill">Analyzing results</a>
+      <a href="/blog/common-mistakes-performance-testing/" class="topic-pill">Common mistakes</a>
+    </div>
   </section>
 
-  <section class="latest">
-    <h2 class="latest-title">Latest posts</h2>
+  <!-- Latest posts -->
+  <section class="section">
+    <div class="latest-header">
+      <h2 class="section-title" style="margin-bottom:0"><span class="section-icon">📝</span> Latest posts</h2>
+      <a href="/blog/" class="view-all">View all →</a>
+    </div>
     <ul class="post-list">
       {posts.map((post) => (
         <li class="post-item">
           <a href={`/blog/${post.slug}`} class="post-link">{post.data.title}</a>
-          <span class="post-date">{post.data.pubDate.toLocaleDateString()}</span>
+          <div class="post-meta">
+            <time class="post-date">{post.data.pubDate.toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' })}</time>
+            {post.data.tags.slice(0,2).map(t => <span class="post-tag">{t}</span>)}
+          </div>
         </li>
       ))}
     </ul>
   </section>
+
 </Layout>
 
 <style>
+  /* Hero */
   .hero {
-    margin-bottom: 2.5rem;
+    padding: 2rem 0 3rem;
+    margin-bottom: 1rem;
+  }
+  .hero-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: var(--accent-muted);
+    color: var(--accent-hover);
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin-bottom: 1.25rem;
+    border: 1px solid rgba(124, 106, 247, 0.2);
   }
   .hero-title {
-    font-size: 2.25rem;
+    font-size: clamp(2rem, 5vw, 2.75rem);
     font-weight: 700;
-    margin: 0 0 0.5rem;
-    letter-spacing: -0.02em;
+    margin: 0 0 0.75rem;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    background: linear-gradient(135deg, var(--text) 0%, var(--text-soft) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
   .hero-desc {
     color: var(--text-soft);
     font-size: 1.1rem;
-    margin: 0;
-    line-height: 1.6;
+    margin: 0 0 1.75rem;
+    max-width: 52ch;
+    line-height: 1.65;
   }
-  .card {
+  .hero-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.6rem 1.25rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.15s ease;
+    text-decoration: none;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff !important;
+    box-shadow: 0 0 20px var(--accent-glow);
+  }
+  .btn-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 0 28px var(--accent-glow);
+    color: #fff !important;
+  }
+  .btn-ghost {
+    background: var(--surface);
+    color: var(--text-soft) !important;
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover {
+    background: var(--surface-hover);
+    color: var(--text) !important;
+    border-color: var(--muted);
+  }
+
+  /* Sections */
+  .section { margin-bottom: 2.5rem; }
+  .section-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 0 0 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .section-icon { font-size: 1rem; }
+
+  /* Mini cards */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.75rem;
+  }
+  .mini-card {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.9rem 1rem;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 1.5rem 1.75rem;
-    margin-bottom: 1.25rem;
+    color: var(--text-soft) !important;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.15s ease;
+    text-decoration: none;
   }
-  .card-highlight {
-    border-color: var(--accent-muted);
-    background: linear-gradient(135deg, var(--surface) 0%, var(--bg-elevated) 100%);
+  .mini-card:hover {
+    background: var(--surface-hover);
+    border-color: var(--accent);
+    color: var(--text) !important;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
   }
-  .card-title {
-    font-size: 1.15rem;
-    font-weight: 600;
-    margin: 0 0 1rem;
+  .mini-card-emoji { font-size: 1.1rem; flex-shrink: 0; }
+  .mini-card-text { line-height: 1.3; }
+
+  /* Tools card */
+  .tools-card {
+    background: linear-gradient(135deg, #1a1040 0%, var(--surface) 60%);
+    border: 1px solid rgba(124, 106, 247, 0.3);
+    border-radius: var(--radius);
+    padding: 1.75rem 2rem;
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    box-shadow: 0 0 40px rgba(124, 106, 247, 0.08);
+  }
+  .tools-card-content { flex: 1; min-width: 220px; }
+  .tools-card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.015em;
     color: var(--text);
   }
-  .card-desc {
-    color: var(--muted);
-    font-size: 0.95rem;
-    margin: 0 0 0.75rem;
+  .tools-card-desc {
+    color: var(--text-soft);
+    font-size: 0.93rem;
+    margin: 0 0 1.1rem;
+    line-height: 1.55;
   }
-  .card-cta {
-    display: inline-block;
-    color: var(--accent);
-    font-weight: 500;
-    transition: color 0.15s ease;
+  .tools-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-end;
   }
-  .card-cta:hover {
+  .tool-badge {
+    padding: 0.3rem 0.85rem;
+    background: var(--accent-muted);
     color: var(--accent-hover);
-  }
-  .link-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .link-list li {
-    margin-bottom: 0.5rem;
-  }
-  .link-list a {
-    color: var(--text-soft);
-    transition: color 0.15s ease;
-  }
-  .link-list a:hover {
-    color: var(--accent);
-  }
-  .topic-list {
-    color: var(--muted);
-    font-size: 0.95rem;
-    margin: 0;
-    padding-left: 1.25rem;
-  }
-  .topic-list li { margin-bottom: 0.35rem; }
-  .topic-list-links {
-    list-style: none;
-    padding-left: 0;
-  }
-  .topic-list-links a {
-    color: var(--text-soft);
-    transition: color 0.15s ease;
-  }
-  .topic-list-links a:hover { color: var(--accent); }
-  .latest {
-    margin-top: 2rem;
-  }
-  .latest-title {
-    font-size: 1.15rem;
+    border: 1px solid rgba(124, 106, 247, 0.25);
+    border-radius: 999px;
+    font-size: 0.82rem;
     font-weight: 600;
-    margin: 0 0 1rem;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
   }
-  .post-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .post-item {
+
+  /* Topics */
+  .topics-grid {
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
     gap: 0.5rem;
+  }
+  .topic-pill {
+    display: inline-block;
+    padding: 0.35rem 0.85rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--text-soft) !important;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.15s ease;
+    text-decoration: none;
+  }
+  .topic-pill:hover {
+    background: var(--accent-muted);
+    border-color: rgba(124, 106, 247, 0.4);
+    color: var(--accent-hover) !important;
+  }
+
+  /* Latest posts */
+  .latest-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 1rem;
   }
-  .post-link {
-    color: var(--text-soft);
-    transition: color 0.15s ease;
-  }
-  .post-link:hover {
-    color: var(--accent);
-  }
-  .post-date {
+  .view-all {
     color: var(--muted);
     font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.15s;
+  }
+  .view-all:hover { color: var(--accent); }
+  .post-list { list-style: none; padding: 0; margin: 0; }
+  .post-item {
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--border-subtle);
+    transition: background 0.1s;
+  }
+  .post-item:last-child { border-bottom: none; }
+  .post-link {
+    display: block;
+    color: var(--text-soft) !important;
+    font-size: 0.97rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+    transition: color 0.15s;
+    text-decoration: none;
+  }
+  .post-link:hover { color: var(--text) !important; }
+  .post-meta { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+  .post-date { color: var(--muted); font-size: 0.82rem; }
+  .post-tag {
+    padding: 0.1rem 0.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--muted);
+    font-size: 0.75rem;
+  }
+
+  @media (max-width: 540px) {
+    .tools-card { padding: 1.25rem; }
+    .tools-badges { flex-direction: row; align-items: flex-start; }
+    .card-grid { grid-template-columns: 1fr 1fr; }
   }
 </style>
